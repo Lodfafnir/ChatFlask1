@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Ищем собеседника{% endblock %}
+
+{% block content %}
+<p>Ожидайте мы ищем для вас собеседника</p>
+<script>
+  function checkForUpdates() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/check_updates'); // отправляем запрос на сервер
+
+  xhr.onload = function() {
+    if (xhr.status === 200) { // если ответ от сервера успешный
+      const response = JSON.parse(xhr.responseText);
+      if (response.redirect) { // если в ответе есть ссылка для перенаправления
+        window.location.href = response.redirect; // перенаправляем пользователя
+      }
+    }
+  };
+
+  xhr.send(); // отправляем запрос на сервер
+}
+
+setInterval(checkForUpdates, 5000); // повторяем запрос каждые 5 секунд
+
+</script>
+{% endblock %}

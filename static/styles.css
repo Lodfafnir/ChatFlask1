@@ -1,0 +1,6 @@
+body {
+    background-image: url('/static/images/tulen.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

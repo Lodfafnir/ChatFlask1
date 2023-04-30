@@ -1,0 +1,12 @@
+{% for message in messages %}
+{% if message.send_by == current_user.id %}
+    <div class="list-group-item list-group-item-action flex-column align-items-start active">
+{% else %}
+    <div class="list-group-item list-group-item-action flex-column align-items-start">
+{% endif %}
+    <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ message.receiver.username }}</h5>
+    </div>
+    <p class="mb-1" style="margin-left: 30px;">{{ message.text }}</p>
+</div>
+{% endfor %}
