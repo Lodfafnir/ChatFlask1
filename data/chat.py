@@ -1,7 +1,9 @@
 from datetime import datetime
+from sqlalchemy.orm import declarative_base, relationship
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
-from sqlalchemy.orm import declarative_base, relationship
+
+
 
 Base = declarative_base()
 
@@ -62,3 +64,11 @@ class Message(Base):
     ridden = Column(Boolean, default=False)
     sender = relationship('User', foreign_keys=[sent_by])
     receiver = relationship('User', foreign_keys=[sent_to])
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "sender": self.sender.username,
+            "receiver": self.receiver.username
+        }
